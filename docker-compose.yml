@@ -1,5 +1,30 @@
 version: '2'
 services:
+  deluge:
+    container_name: deluge
+    image: binhex/arch-delugevpn
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8112:8112
+      - 8118:8118
+      - 58846:58846
+      - 58946:58946
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VPN_ENABLED=yes
+      - VPN_USER=addisonhvnr@gmail.com
+      - VPN_PASS
+      - VPN_PROV=custom
+      - LAN_NETWORK=10.0.0.0/24
+      - DEBUG=false
+    volumes:
+      - ${HOME}/services/deluge/data:/data
+      - ${HOME}/services/deluge/config:/config
+      - /etc/localtime:/etc/localtime:ro
+     
   plex:
     container_name: plex
     image: plexinc/pms-docker
@@ -21,6 +46,20 @@ services:
       - ${HOME}/services/plex/config:/config
       - ${HOME}/services/plex/transcode:/transcode
       - ${HOME}/services/plex/data:/data
+  
+  sonnar:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    restart: unless-stopped
+    ports:
+      - 8989:8989
+    environment:
+      - TZ=EST
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${HOME}/services/sonarr/config:/config
+      - ${HOME}/services/plex/data/TV:/tv
+      - ${HOME}/services/downloads:/downloads
 
   bind:
     container_name: bind
