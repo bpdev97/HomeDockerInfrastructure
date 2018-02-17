@@ -15,7 +15,7 @@ services:
       - PUID=1000
       - PGID=1000
       - VPN_ENABLED=yes
-      - VPN_USER=addisonhvnr@gmail.com
+      - VPN_USER
       - VPN_PASS
       - VPN_PROV=custom
       - LAN_NETWORK=10.0.0.0/24
