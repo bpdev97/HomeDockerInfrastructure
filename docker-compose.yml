@@ -22,3 +22,14 @@ services:
       - ${HOME}/services/plex/transcode:/transcode
       - ${HOME}/services/plex/data:/data
 
+  bind:
+    container_name: bind
+    image: sameersbn/bind
+    restart: unless-stopped
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    environment:
+      - WEBMIN_ENABLED=false
+    volumes:
+      - ${HOME}/services/bind:/data 
