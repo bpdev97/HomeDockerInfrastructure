@@ -18,7 +18,7 @@ services:
       - TZ=EST
       - ADVERTISE_IP=http://10.0.0.113:32400/
     volumes:
-      - ./services/plex/config:/config
-      - ./services/plex/transcode:/transcode
-      - ./services/plex/data:/data
+      - ${HOME}/services/plex/config:/config
+      - ${HOME}/services/plex/transcode:/transcode
+      - ${HOME}/services/plex/data:/data
 
